@@ -15,7 +15,7 @@ class CodeArchive extends Model
 
     public function archives()
     {
-        return $this->hasMany(Archive::class);
+        return $this->hasMany(Archive::class, 'code_archive_id');
     }
 
 }

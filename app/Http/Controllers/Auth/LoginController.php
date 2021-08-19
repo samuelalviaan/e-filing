@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -39,19 +40,25 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request)
-    {
-        $request->all();
+    // public function login(Request $request)
+    // {  
+    //     $inputVal = $request->all();
+   
+    //     $this->validate($request, [
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+   
+    //     if(Auth::attempt(['email' => $inputVal['email'], 'password' => $inputVal['password']])){
+    //         if (auth()->user()->role == 'admin') {
+    //             return redirect()->route('admin.route');
+    //         }else{
+    //             return redirect()->route('home');
+    //         }
+    //     }else{
+    //         return redirect()->route('login')
+    //             ->with('error','Email & Password are incorrect.');
+    //     }     
+    // }
 
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-    }
-
-    protected function redirectTo()
-    {
-        session()->flash('success', 'Welcome to E-Filing!');
-        return $this->redirectTo;
-    }
 }

@@ -1,76 +1,220 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #333333">
+    <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #005A8D">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('arsip.home') }}">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+            href="{{ route('archives.index') }}">
             <div class="sidebar-brand-icon">
-                <i class="far fa-folder"></i>
+                <img src="{{ asset('img/icon/logo.png') }}" style="width: 50px">
             </div>
-            <div class="sidebar-brand-text mx-3">E-Filing</div>
+            <div class="sidebar-brand-text mx-3 text-ligh">E-Filing</div>
         </a>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item {{ Nav::isRoute('arsip.home') }}">
-            <a class="nav-link" href="{{ route('arsip.home') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>{{ __('Dashboard') }}</span></a>
-        </li>
+        @if (Auth::user()->role == 'superadmin')
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item {{ Nav::isRoute('archives.index') }}">
+                <a class="nav-link" href="{{ route('archives.index') }}">
+                    <i class="fas fa-home"></i>
+                    <span class="text-light">{{ __('Dashboard') }}</span></a>
+            </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+            <hr class="sidebar-divider">
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            {{ __('Arsip') }}
-        </div>
 
-        <!-- Nav Item - Profile -->
-        <li class="nav-item {{ Nav::isRoute('code_archive.create') }}">
-            <a class="nav-link" href="{{ route('code_archive.create') }}">
-                <i class="fas fa-fw fa-user"></i>
-                <span>{{ __('Tambah Arsip') }}</span>
-            </a>
-        </li>
+            <!-- Heading -->
+            <div class="sidebar-heading text-white">
+                {{ __('Arsip') }}
+            </div>
 
-        <!-- Nav Item - About -->
-        <li class="nav-item {{ Nav::isRoute('archives.history') }}">
-            <a class="nav-link" href="{{ route('archives.history') }}">
-                <i class="fas fa-fw fa-hands-helping"></i>
-                <span>{{ __('Riwayat Arsip') }}</span>
-            </a>
-        </li>
+            <!-- Nav Item - Tambah Arsip -->
+            <li class="nav-item {{ Nav::isRoute('archives.create') }}">
+                <a class="nav-link" href="{{ route('archives.create') }}">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>{{ __('Tambah Arsip') }}</span>
+                </a>
+            </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+            <!-- Nav Item - Riwayat Arsip -->
+            <li class="nav-item {{ Nav::isRoute('archives.history') }}">
+                <a class="nav-link" href="{{ route('archives.history') }}">
+                    <i class="fas fa-history"></i>
+                    <span>{{ __('Riwayat Arsip') }}</span>
+                </a>
+            </li>
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            {{ __('Settings') }}
-        </div>
 
-        <!-- Nav Item - Profile -->
-        <li class="nav-item {{ Nav::isRoute('profile') }}">
-            <a class="nav-link" href="{{ route('profile') }}">
-                <i class="fas fa-fw fa-user"></i>
-                <span>{{ __('Profile') }}</span>
-            </a>
-        </li>
+            <hr class="sidebar-divider">
 
-        <!-- Nav Item - About -->
-        <li class="nav-item {{ Nav::isRoute('about') }}">
-            <a class="nav-link" href="{{ route('about') }}">
-                <i class="fas fa-fw fa-hands-helping"></i>
-                <span>{{ __('About') }}</span>
-            </a>
-        </li>
+            <!-- Heading -->
+            <div class="sidebar-heading text-white">
+                {{ __('Kode Arsip') }}
+            </div>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+            <!-- Nav Item - Riwayat Arsip -->
+            <li class="nav-item {{ Nav::isRoute('code_archives.index') }}">
+                <a class="nav-link" href="{{ route('code_archives.index') }}">
+                    <i class="fas fa-file"></i>
+                    <span>Daftar Kode Arsip</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Tambah Arsip -->
+            <li class="nav-item {{ Nav::isRoute('code_archives.create') }}">
+                <a class="nav-link" href="{{ route('code_archives.create') }}">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>{{ __('Tambah Kode Arsip') }}</span>
+                </a>
+            </li>
+
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading text-white">
+                {{ __('Laporan') }}
+            </div>
+
+            <li class="nav-item {{ Nav::isRoute('reports.index') }}">
+                <a class="nav-link" href="{{ route('reports.index') }}">
+                    <i class="fas fa-fw fa-file"></i>
+                    <span>{{ __('Laporan') }}</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading text-white">
+                {{ __('User') }}
+            </div>
+
+            <li class="nav-item" {{ Nav::isRoute('users.index') }}>
+                <a class="nav-link" href="{{ route('users.index') }}">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>{{ __('Daftar User') }}</span>
+                </a>
+            </li>
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            @elseif (Auth::user()->role == 'admin')
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item {{ Nav::isRoute('archives.index') }}">
+                <a class="nav-link" href="{{ route('archives.index') }}">
+                    <i class="fas fa-home"></i>
+                    <span class="text-light">{{ __('Dashboard') }}</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading text-white">
+                {{ __('Arsip') }}
+            </div>
+
+            <!-- Nav Item - Tambah Arsip -->
+            <li class="nav-item {{ Nav::isRoute('archives.create') }}">
+                <a class="nav-link" href="{{ route('archives.create') }}">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>{{ __('Tambah Arsip') }}</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Riwayat Arsip -->
+            <li class="nav-item {{ Nav::isRoute('archives.history') }}">
+                <a class="nav-link" href="{{ route('archives.history') }}">
+                    <i class="fas fa-history"></i>
+                    <span>{{ __('Riwayat Arsip') }}</span>
+                </a>
+            </li>
+
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading text-white">
+                {{ __('Laporan') }}
+            </div>
+
+            <li class="nav-item {{ Nav::isRoute('reports.index') }}">
+                <a class="nav-link" href="{{ route('reports.index') }}">
+                    <i class="fas fa-fw fa-file"></i>
+                    <span>{{ __('Laporan') }}</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            {{-- <hr class="sidebar-divider"> --}}
+
+            <!-- Heading -->
+            {{-- <div class="sidebar-heading text-white">
+                {{ __('User') }}
+            </div>
+
+            <li class="nav-item" {{ Nav::isRoute('users.index') }}>
+                <a class="nav-link" href="{{ route('users.index') }}">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>{{ __('Daftar User') }}</span>
+                </a>
+            </li> --}}
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+        @elseif (Auth::user()->role == 'user')
+
+            <li class="nav-item {{ Nav::isRoute('archives.index') }}">
+                <a class="nav-link" href="{{ route('archives.index') }}">
+                    <i class="fas fa-home"></i>
+                    <span class="text-light">{{ __('Dashboard') }}</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading text-white">
+                {{ __('Arsip') }}
+            </div>
+
+            <!-- Nav Item - Tambah Arsip -->
+            <li class="nav-item {{ Nav::isRoute('archives.create') }}">
+                <a class="nav-link" href="{{ route('archives.create') }}">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>{{ __('Tambah Arsip') }}</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Riwayat Arsip -->
+            <li class="nav-item {{ Nav::isRoute('archives.history') }}">
+                <a class="nav-link" href="{{ route('archives.history') }}">
+                    <i class="fas fa-history"></i>
+                    <span>{{ __('Riwayat Arsip') }}</span>
+                </a>
+            </li>
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ __('Laporan') }}
+            </div>
+
+            <li class="nav-item {{ Nav::isRoute('reports.index') }}">
+                <a class="nav-link" href="{{ route('reports.index') }}">
+                    <i class="fas fa-fw fa-file"></i>
+                    <span>{{ __('Laporan') }}</span>
+                </a>
+            </li>
+
+        @endif
+
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -87,38 +231,30 @@
         <div id="content">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand topbar mb-4 static-top shadow" style="background-color: #777777">
+            <nav class="navbar navbar-expand topbar mb-4 static-top shadow" style="background-color: #ffffff">
 
                 <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- Topbar Search -->
-                {{-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form> --}}
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
 
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-search fa-fw"></i>
                         </a>
                         <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            aria-labelledby="searchDropdown">
                             <form class="form-inline mr-auto w-100 navbar-search">
                                 <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                        placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
                                             <i class="fas fa-search fa-sm"></i>
@@ -129,136 +265,27 @@
                         </div>
                     </li>
 
-                    <!-- Nav Item - Alerts -->
-                    {{-- <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell fa-fw"></i>
-                            <!-- Counter - Alerts -->
-                            <span class="badge badge-danger badge-counter">3+</span>
-                        </a> --}}
-                        <!-- Dropdown - Alerts -->
-                        {{-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                            <h6 class="dropdown-header">
-                                Alerts Center
-                            </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-primary">
-                                        <i class="fas fa-file-alt text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">December 12, 2019</div>
-                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-success">
-                                        <i class="fas fa-donate text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">December 7, 2019</div>
-                                    $290.29 has been deposited into your account!
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-warning">
-                                        <i class="fas fa-exclamation-triangle text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">December 2, 2019</div>
-                                    Spending Alert: We've noticed unusually high spending for your account.
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                        </div> --}}
-                    </li>
-
-                    <!-- Nav Item - Messages -->
-                    {{-- <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-envelope fa-fw"></i>
-                            <!-- Counter - Messages -->
-                            <span class="badge badge-danger badge-counter">7</span>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                            <h6 class="dropdown-header">
-                                Message Center
-                            </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
-                                <div class="font-weight-bold">
-                                    <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                                    <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
-                                    <div class="status-indicator"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-                                    <div class="small text-gray-500">Jae Chun · 1d</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
-                                    <div class="status-indicator bg-warning"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
-                                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
-                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                        </div>
-                    </li> --}}
 
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline small" style="color: white">Admin</span>
-                            <figure class="img-profile rounded-circle avatar font-weight-bold" data-initial=""></figure>
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-fw fa-user"></i>
+                            <span class="ml-2 d-none d-lg-inline medium"
+                                style="color: rgb(0, 0, 0)">{{ Auth::user()->name }}</span>
+                            {{-- <figure class="img-user rounded-circle avatar font-weight-bold" data-initial=""></figure> --}}
                         </a>
                         <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="{{ route('profile') }}">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="{{ route('users.edit') }}">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-black-400"></i>
                                 {{ __('Profile') }}
                             </a>
-                            <a class="dropdown-item" href="javascript:void(0)">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('Settings') }}
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0)">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('Activity Log') }}
-                            </a>
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-black-400"></i>
                                 {{ __('Logout') }}
                             </a>
                         </div>
@@ -281,7 +308,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <footer class="sticky-footer" style="background-color: #777777">
+        <footer class="sticky-footer" style="background-color: #ffffff">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto font-weight-bold" style="color: black">
                     <span>Copyright &copy; E-Filing 2021</span>
@@ -292,5 +319,28 @@
 
     </div>
     <!-- End of Content Wrapper -->
+
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Ready to Leave?') }}</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Apakah Anda yakin ingin keluar?</div>
+                <div class="modal-footer">
+                    <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
+                    <a class="btn btn-danger" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

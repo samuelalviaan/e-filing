@@ -22,7 +22,7 @@
 
     <div class="row">
     
-        <form action="{{route('arsip.store')}}" class="form-group" method="post" enctype="multipart/form-data">
+        <form action="{{route('archives.store')}}" class="form-group" method="post" enctype="multipart/form-data">
             @csrf
 
             <div class="col-md-8">
@@ -91,6 +91,17 @@
     </div>
 
 </div>
+
+{{-- <script type="text/javascript">
+
+$('.datepicker').datepicker({
+    format: "yyyy",
+    viewMode: "years", 
+    minViewMode: "years",
+    autoclose: true,
+});
+
+</script> --}}
 
 @endsection
 

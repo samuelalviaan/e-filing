@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.0",
         "barryvdh/laravel-dompdf": "^0.9.0",
+        "consoletvs/charts": "7.*",
         "devmarketer/easynav": "^1.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
@@ -17,7 +18,8 @@
         "laravel/framework": "^8.0",
         "laravel/legacy-factories": "^1.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0"
+        "laravel/ui": "^3.3",
+        "laraveldaily/laravel-charts": "^0.1.25"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

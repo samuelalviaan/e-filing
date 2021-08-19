@@ -18,9 +18,9 @@ class CreateArsipTable extends Migration
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
             $table->integer('code_archive_id');
-            $table->integer('kode_surat');
+            $table->string('nomor_surat');
             $table->string('nama_arsip');
-            $table->string('jenis_arsip');
+            // $table->string('jenis_arsip');
             $table->string('file');
             $table->string('tahun');
             $table->string('keterangan');
@@ -35,6 +35,6 @@ class CreateArsipTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('arsip');
+        Schema::dropIfExists('archives');
     }
 }

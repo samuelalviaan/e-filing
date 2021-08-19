@@ -16,9 +16,10 @@ class CreateJenisArsipTable extends Migration
     {
         Schema::create('code_archives', function (Blueprint $table) {
             $table->id();
-            $table->integer('archive_id');
+            $table->string('archive_id');
             $table->string('nama_kode_arsip');
             $table->string('kode_arsip');
+            $table->timestamps();
         });
     }
 
